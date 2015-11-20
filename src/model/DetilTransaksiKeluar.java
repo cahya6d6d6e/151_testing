@@ -1,17 +1,17 @@
 package model;
 
-public class DetilTransaksi {
+public class DetilTransaksiKeluar {
 	private Produk barang;
 	private int jumlah;
-	private Transaksi transaksi;
+	private TransaksiKeluar transaksi;
 
-	public DetilTransaksi(Transaksi transaksi, Produk barang, int jumlah) {
+	public DetilTransaksiKeluar(TransaksiKeluar transaksi, Produk barang, int jumlah) {
 		this.transaksi = transaksi;
 		this.barang = barang;
 		this.jumlah = jumlah;
 	}
 
-	public DetilTransaksi(Produk barang, int jumlah) {
+	public DetilTransaksiKeluar(Produk barang, int jumlah) {
 		this.barang = barang;
 		this.jumlah = jumlah;
 	}
@@ -24,7 +24,7 @@ public class DetilTransaksi {
 		return jumlah;
 	}
 
-	public Transaksi getTransaksi() {
+	public TransaksiKeluar getTransaksi() {
 		return transaksi;
 	}
 

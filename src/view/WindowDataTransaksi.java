@@ -18,7 +18,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import model.Produk;
-import model.Transaksi;
+import model.TransaksiKeluar;
 import controller.CustActionListener;
 import controller.CustWindowListener;
 
@@ -61,11 +61,11 @@ public class WindowDataTransaksi extends JFrame {
 
     }
 
-    public Transaksi getTransaksi() {
+    public TransaksiKeluar getTransaksi() {
         if (tbl.getSelectedRow() >= 0) {
             String val = tbl.getValueAt(tbl.getSelectedRow(), 0).toString();
 
-            return new Transaksi(Integer.parseInt(val));
+            return new TransaksiKeluar(Integer.parseInt(val));
         } else {
             return null;
         }

@@ -3,9 +3,9 @@ package model;
 public class DetilTransaksiMasuk {
 	private Produk barang;
 	private int jumlah;
-	private Transaksi transaksi;
+	private TransaksiMasuk transaksi;
 
-	public DetilTransaksiMasuk(Transaksi transaksi, Produk barang, int jumlah) {
+	public DetilTransaksiMasuk(TransaksiMasuk transaksi, Produk barang, int jumlah) {
 		this.transaksi = transaksi;
 		this.barang = barang;
 		this.jumlah = jumlah;
@@ -24,7 +24,7 @@ public class DetilTransaksiMasuk {
 		return jumlah;
 	}
 
-	public Transaksi getTransaksi() {
+	public TransaksiMasuk getTransaksi() {
 		return transaksi;
 	}
 

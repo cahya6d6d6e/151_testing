@@ -29,154 +29,137 @@ import controller.CustWindowListener;
 
 public class WindowFormBarang extends JFrame {
 
-    private Core core;
+	private Core core;
 
-    private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    private JTextField tfNama, tfJumlah, tfHargaBeli, tfHargaJual;
-    private JTable tbl;
-    private JLabel lbNama, lbJumlah, lbHargaBeli, lbHargaJual;
+	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	private JTextField tfNama, tfJumlah, tfHargaBeli, tfHargaJual;
+	private JTable tbl;
+	private JLabel lbNama, lbJumlah, lbHargaBeli, lbHargaJual;
 
-    private Vector<Produk> barang = new Vector<Produk>();
-    private Vector<String> nmBarang = new Vector<String>();
+	private Vector<Produk> barang = new Vector<Produk>();
 
-    public WindowFormBarang(final Core core) {
-        super("Formulir Barang");
-        this.core = core;
+	public WindowFormBarang(final Core core) {
+		super("Formulir Barang");
+		this.core = core;
 
-        ResultSet rs = Operator.getListProduk(core.getConnection());
-        try {
-            while (rs.next()) {
-                barang.add(new Produk(rs.getInt(1), rs.getString(2), rs
-                        .getInt(3), rs.getInt(4), rs.getInt(5)));
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        }
+		ResultSet rs = Operator.getListProduk(core.getConnection());
+		try {
+			while (rs.next()) {
+				barang.add(new Produk(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5)));
+			}
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		}
 
-        setResizable(false);
+		setResizable(false);
 
-        setSize(810, 272);
-        setLocation((screenSize.width - getWidth()) / 2,
-                (screenSize.height - getHeight()) / 2);
-        setLayout(null);
-        Container container = this.getContentPane();
-        container.setBackground(Color.WHITE);
+		setSize(810, 272);
+		setLocation((screenSize.width - getWidth()) / 2, (screenSize.height - getHeight()) / 2);
+		setLayout(null);
+		Container container = this.getContentPane();
+		container.setBackground(Color.WHITE);
 
-        tbl = new JTable(Operator.resultSetToTableModel(Operator
-                .getListProduk(core.getConnection())));
-        Operator.disableTableEdit(tbl);
-        JPanel panTbl = new JPanel();
+		tbl = new JTable(Operator.resultSetToTableModel(Operator.getListProduk(core.getConnection())));
+		Operator.disableTableEdit(tbl);
+		JPanel panTbl = new JPanel();
 
-        panTbl.setLayout(new BorderLayout());
-        panTbl.setBackground(Color.WHITE);
-        panTbl.add(new JScrollPane(tbl), BorderLayout.CENTER);
+		panTbl.setLayout(new BorderLayout());
+		panTbl.setBackground(Color.WHITE);
+		panTbl.add(new JScrollPane(tbl), BorderLayout.CENTER);
 
-        tfNama = new JTextField();
-        tfJumlah = new JTextField();
-        tfHargaBeli = new JTextField();
-        tfHargaJual = new JTextField();
+		tfNama = new JTextField();
+		tfJumlah = new JTextField();
+		tfHargaBeli = new JTextField();
+		tfHargaJual = new JTextField();
 
-        tfNama.setBounds(115, 10, 170, 20);
-        tfJumlah.setBounds(115, 35, 170, 20);
-        tfJumlah.addKeyListener(new CustKeyListener(core, this, tfJumlah,
-                CustKeyListener.NUMBER_ONLY));
+		tfNama.setBounds(115, 10, 170, 20);
+		tfJumlah.setBounds(115, 35, 170, 20);
+		tfJumlah.addKeyListener(new CustKeyListener(core, this, tfJumlah, CustKeyListener.NUMBER_ONLY));
 
-        tfHargaBeli.setBounds(115, 60, 170, 20);
-        tfHargaBeli.addKeyListener(new CustKeyListener(core, this, tfHargaJual,
-                CustKeyListener.NUMBER_ONLY));
-        tfHargaJual.setBounds(115, 85, 170, 20);
-        tfHargaJual.addKeyListener(new CustKeyListener(core, this, tfHargaJual,
-                CustKeyListener.NUMBER_ONLY));
-        panTbl.setBounds(295, 10, 500, 200);
+		tfHargaBeli.setBounds(115, 60, 170, 20);
+		tfHargaBeli.addKeyListener(new CustKeyListener(core, this, tfHargaJual, CustKeyListener.NUMBER_ONLY));
+		tfHargaJual.setBounds(115, 85, 170, 20);
+		tfHargaJual.addKeyListener(new CustKeyListener(core, this, tfHargaJual, CustKeyListener.NUMBER_ONLY));
+		panTbl.setBounds(295, 10, 500, 200);
 
-        lbNama = new JLabel("Nama Barang");
-        lbJumlah = new JLabel("Jumlah Barang");
-        lbHargaBeli = new JLabel("Harga Beli");
-        lbHargaJual = new JLabel("Harga Jual");
+		lbNama = new JLabel("Nama Barang");
+		lbJumlah = new JLabel("Jumlah Barang");
+		lbHargaBeli = new JLabel("Harga Beli");
+		lbHargaJual = new JLabel("Harga Jual");
 
-        lbNama.setBounds(10, 10, 100, 20);
-        lbNama.setHorizontalAlignment(JLabel.RIGHT);
-        lbJumlah.setBounds(10, 35, 100, 20);
-        lbJumlah.setHorizontalAlignment(JLabel.RIGHT);
+		lbNama.setBounds(10, 10, 100, 20);
+		lbNama.setHorizontalAlignment(JLabel.RIGHT);
+		lbJumlah.setBounds(10, 35, 100, 20);
+		lbJumlah.setHorizontalAlignment(JLabel.RIGHT);
 
-        lbHargaBeli.setBounds(10, 60, 100, 20);
-        lbHargaBeli.setHorizontalAlignment(JLabel.RIGHT);
-        lbHargaJual.setBounds(10, 85, 100, 20);
-        lbHargaJual.setHorizontalAlignment(JLabel.RIGHT);
+		lbHargaBeli.setBounds(10, 60, 100, 20);
+		lbHargaBeli.setHorizontalAlignment(JLabel.RIGHT);
+		lbHargaJual.setBounds(10, 85, 100, 20);
+		lbHargaJual.setHorizontalAlignment(JLabel.RIGHT);
 
-        JButton buttonTambah = new JButton("Tambah");
-        JButton buttonDelete = new JButton("Delete");
+		JButton buttonTambah = new JButton("Tambah");
+		JButton buttonDelete = new JButton("Delete");
 
-        buttonTambah.setBounds(205, 115, 80, 20);
-        buttonTambah.addActionListener(new CustActionListener(core, this, tbl,
-                buttonTambah, CustActionListener.INSERT_BARANG));
-        buttonDelete.setBounds(115, 115, 80, 20);
-        buttonDelete.addActionListener(new CustActionListener(core, this, tbl,
-                buttonDelete, CustActionListener.DELETE_BARANG));
-        // Add Content
-        container.add(tfNama);
-        container.add(tfJumlah);
-        container.add(tfHargaBeli);
-        container.add(tfHargaJual);
-        container.add(lbNama);
-        container.add(lbJumlah);
-        container.add(lbHargaBeli);
-        container.add(lbHargaJual);
-        container.add(panTbl);
+		buttonTambah.setBounds(205, 115, 80, 20);
+		buttonTambah.addActionListener(
+				new CustActionListener(core, this, tbl, buttonTambah, CustActionListener.INSERT_BARANG));
+		buttonDelete.setBounds(115, 115, 80, 20);
+		buttonDelete.addActionListener(
+				new CustActionListener(core, this, tbl, buttonDelete, CustActionListener.DELETE_BARANG));
+		// Add Content
+		container.add(tfNama);
+		container.add(tfJumlah);
+		container.add(tfHargaBeli);
+		container.add(tfHargaJual);
+		container.add(lbNama);
+		container.add(lbJumlah);
+		container.add(lbHargaBeli);
+		container.add(lbHargaJual);
+		container.add(panTbl);
 
-        container.add(buttonDelete);
-        container.add(buttonTambah);
-        this.addWindowListener(new CustWindowListener(core, this));
+		container.add(buttonDelete);
+		container.add(buttonTambah);
+		this.addWindowListener(new CustWindowListener(core, this));
 
-    }
+	}
 
-    public Vector<Produk> getListBarang() {
-        return barang;
-    }
+	public Vector<Produk> getListBarang() {
+		return barang;
+	}
 
-    public Produk getSelectedBarang() {
-        return barang.get(tbl.getSelectedRow());
-    }
+	public Produk getSelectedBarang() {
+		return barang.get(tbl.getSelectedRow());
+	}
 
-    public void submitToDB() {
-        if (Operator.tambahProduk(getBarang(), core.getConnection())) {
-            JOptionPane.showMessageDialog(this, "Data telah ditambahkan!");
-        } else {
-            JOptionPane.showMessageDialog(this, "Terjadi kesalahan!");
-        }
+	public void submitToDB() {
+		if (Operator.tambahProduk(getBarang(), core.getConnection())) {
+			JOptionPane.showMessageDialog(this, "Data telah ditambahkan!");
+		} else {
+			JOptionPane.showMessageDialog(this, "Terjadi kesalahan!");
+		}
 
-        ((DefaultTableModel) tbl.getModel()).addRow(
-                new Object[]{
-                    Operator.getLastIDProduk(
-                            core.getConnection()),
-                    tfNama.getText(),
-                    tfJumlah.getText(),
-                    tfHargaBeli.getText(),
-                    tfHargaJual.getText()
-                });
+		((DefaultTableModel) tbl.getModel()).addRow(new Object[] { Operator.getLastIDProduk(core.getConnection()),
+				tfNama.getText(), tfJumlah.getText(), tfHargaBeli.getText(), tfHargaJual.getText() });
 
-        tfNama.setText("");
-        tfJumlah.setText("");
-        tfHargaBeli.setText("");
-        tfHargaJual.setText("");
-    }
+		tfNama.setText("");
+		tfJumlah.setText("");
+		tfHargaBeli.setText("");
+		tfHargaJual.setText("");
+	}
 
-    public void resetForm() {
-        tfNama.setText("");
-        tfJumlah.setText("");
-        tfHargaBeli.setText("");
-        tfHargaJual.setText("");
+	public void resetForm() {
+		tfNama.setText("");
+		tfJumlah.setText("");
+		tfHargaBeli.setText("");
+		tfHargaJual.setText("");
 
-        if (tbl.getSelectedRow() >= 0) {
-            ((DefaultTableModel) tbl.getModel())
-                    .removeRow(tbl.getSelectedRow());
-        }
-    }
+		if (tbl.getSelectedRow() >= 0) {
+			((DefaultTableModel) tbl.getModel()).removeRow(tbl.getSelectedRow());
+		}
+	}
 
-    public Produk getBarang() {
-        return new Produk(tfNama.getText(),
-                Integer.parseInt(tfJumlah.getText()),
-                Integer.parseInt(tfHargaBeli.getText()),
-                Integer.parseInt(tfHargaJual.getText()));
-    }
+	public Produk getBarang() {
+		return new Produk(tfNama.getText(), Integer.parseInt(tfJumlah.getText()),
+				Integer.parseInt(tfHargaBeli.getText()), Integer.parseInt(tfHargaJual.getText()));
+	}
 }

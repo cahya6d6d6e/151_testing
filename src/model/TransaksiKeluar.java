@@ -4,15 +4,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
 
-public class Transaksi {
+public class TransaksiKeluar {
 
     private int id;
-    private Vector<DetilTransaksi> detilTransaksi = new Vector<DetilTransaksi>();
+    private Vector<DetilTransaksiKeluar> detilTransaksi = new Vector<DetilTransaksiKeluar>();
     private Date tgl;
     private Karyawan usr;
     private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy");
 
-    public Transaksi(int id, Vector<DetilTransaksi> detilTransaksi, Date tgl,
+    public TransaksiKeluar(int id, Vector<DetilTransaksiKeluar> detilTransaksi, Date tgl,
             Karyawan usr) {
         this.id = id;
         this.detilTransaksi = detilTransaksi;
@@ -20,12 +20,12 @@ public class Transaksi {
         this.usr = usr;
     }
 
-    public Transaksi(Date tgl, Karyawan usr) {
+    public TransaksiKeluar(Date tgl, Karyawan usr) {
         this.tgl = tgl;
         this.usr = usr;
     }
 
-    public Transaksi(int id) {
+    public TransaksiKeluar(int id) {
         this.id = id;
     }
 
@@ -33,7 +33,7 @@ public class Transaksi {
         return id;
     }
 
-    public Vector<DetilTransaksi> getDetilTransaksi() {
+    public Vector<DetilTransaksiKeluar> getDetilTransaksi() {
         return detilTransaksi;
     }
 
@@ -66,7 +66,7 @@ public class Transaksi {
         return total;
     }
 
-    public void addDetilTransaksi(DetilTransaksi dt) {
+    public void addDetilTransaksi(DetilTransaksiKeluar dt) {
         detilTransaksi.add(dt);
     }
 }

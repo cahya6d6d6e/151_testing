@@ -10,20 +10,28 @@ import controller.Core;
 import controller.Operator;
 import view.WindowFormBarang;
 import view.WindowFormTransaksiKeluar;
+import view.WindowFormTransaksiMasuk;
 
 public class CustKeyListener implements KeyListener {
 
 	public static final int NUMBER_ONLY = 0, ON_STOCK = 1;
 	private int mode;
 	private JTextField jf;
-	private WindowFormTransaksiKeluar frmFormTrans;
+	private WindowFormTransaksiKeluar frmFormTransKeluar;
+	private WindowFormTransaksiMasuk frmFormTransMasuk;
 	private WindowFormBarang frmFormBarang;
 	private JButton btn;
 	private Core core;
 
 	public CustKeyListener(WindowFormTransaksiKeluar frmFormTrans, JTextField jf,
 			int mode) {
-		this.frmFormTrans = frmFormTrans;
+		this.frmFormTransKeluar = frmFormTrans;
+		this.jf = jf;
+		this.mode = mode;
+	}
+	public CustKeyListener(WindowFormTransaksiMasuk frmFormTrans, JTextField jf,
+			int mode) {
+		this.frmFormTransMasuk = frmFormTrans;
 		this.jf = jf;
 		this.mode = mode;
 	}
@@ -46,7 +54,7 @@ public class CustKeyListener implements KeyListener {
 	public void keyReleased(KeyEvent ev) {
 		switch (mode) {
 		case ON_STOCK:
-			final int LIMIT = frmFormTrans.getSelectedBarang().getJumlah();
+			final int LIMIT = frmFormTransKeluar.getSelectedBarang().getJumlah();
 			if (jf.getText().equalsIgnoreCase("")) {
 
 			} else if (Integer.parseInt(jf.getText()) > LIMIT) {
@@ -71,7 +79,7 @@ public class CustKeyListener implements KeyListener {
 			}
 			break;
 		case ON_STOCK:
-			final int LIMIT = frmFormTrans.getSelectedBarang().getJumlah();
+			final int LIMIT = frmFormTransKeluar.getSelectedBarang().getJumlah();
 			if (jf.getText().equalsIgnoreCase("")) {
 
 			} else if (Integer.parseInt(jf.getText()) > LIMIT) {

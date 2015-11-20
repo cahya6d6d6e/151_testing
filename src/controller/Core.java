@@ -7,9 +7,12 @@ import view.WindowDataBarang;
 import view.WindowFormTransaksiKeluar;
 import view.WindowLogin;
 import model.Produk;
-import model.DetilTransaksi;
+import model.DetilTransaksiKeluar;
+import model.DetilTransaksiMasuk;
 import model.Karyawan;
-import model.Transaksi;
+import model.TransaksiKeluar;
+import model.TransaksiMasuk;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.text.SimpleDateFormat;
@@ -72,7 +75,7 @@ public class Core {
         }
     }
 
-    public void printReport(Transaksi trns) {
+    public void printReport(TransaksiKeluar trns) {
         int ID = Operator.getLastIDTransMasuk(con);
 
         String header = "\n"
@@ -91,7 +94,35 @@ public class Core {
                 + "\n================================================================="
                 + "\nTgl " + trns.getTglAsString();
         for (int i = 0; i < trns.getDetilTransaksi().size(); i++) {
-            DetilTransaksi dt = trns.getDetilTransaksi().get(i);
+            DetilTransaksiKeluar dt = trns.getDetilTransaksi().get(i);
+            data = data + "\n" + dt.getBarang().getNama() + "\t"
+                    + dt.getJumlah() + "x\t" + dt.getJumlah()
+                    * dt.getBarang().getHargaBeli();
+        }
+        frmReport = new WindowReport(this,
+                new String[]{header, data, footer});
+        frmReport.setVisible(true);
+    }
+    public void printReport(TransaksiMasuk trns) {
+        int ID = Operator.getLastIDTransMasuk(con);
+
+        String header = "\n"
+                + "\t\t        PC Part Shop"
+                + "\n\t\t  Hi Tech Mall Surabaya "
+                + "\n\t \t\t  No. "
+                + ID
+                + "\nKasir : "
+                + loggedUser.getId()
+                + "\n=================================================================", data = "", footer = "\n"
+                + "\n---------------------------------------"
+                + "\nTotal : "
+                + trns.getTotalItem()
+                + " Item      "
+                + trns.getTotalHrg()
+                + "\n================================================================="
+                + "\nTgl " + trns.getTglAsString();
+        for (int i = 0; i < trns.getDetilTransaksi().size(); i++) {
+            DetilTransaksiMasuk dt = trns.getDetilTransaksi().get(i);
             data = data + "\n" + dt.getBarang().getNama() + "\t"
                     + dt.getJumlah() + "x\t" + dt.getJumlah()
                     * dt.getBarang().getHargaBeli();
